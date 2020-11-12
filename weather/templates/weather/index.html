@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'weather/style.css' %}" />
+</head>
+<body>
+
+<form class="input_data" method="POST">
+    {% csrf_token %}
+    {{ form.name }}
+    <button type="submit">Add</button>
+</form>
+
+<div>
+    {% for city_weather in weather_data %}
+    <div class="location">
+        {{ city_weather.city }}
+    </div>
+        {{ city_weather.temperature }}
+        {{ city_weather.description }}
+        <img src="http://openweathermap.org/img/w/{{ city_weather.icon }}.png">
+{% endfor %}
+</div>
+</body>
+</html>
